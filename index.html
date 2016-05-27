@@ -1,0 +1,284 @@
+<html>
+<head>
+<style>
+/* These apply across all breakpoints because they are outside of a media query */
+/* Make the labels light gray all caps across the board */
+.movie-list thead th,
+.movie-list tbody th .ui-table-cell-label,
+.movie-list tbody td .ui-table-cell-label {
+    text-transform: uppercase;
+    font-size: .7em;
+    color: rgba(0,0,0,0.5);
+    font-weight: normal;
+}
+/* White bg, large blue text for rank and title */
+.movie-list tbody th {
+    font-size: 1.2em;
+    background-color: #fff;
+    color: #77bbff;
+    text-align: center;
+}
+/*  Add a bit of extra left padding for the title */
+.movie-list tbody td.title {
+    padding-left: .8em;
+}
+/* Add strokes */
+.movie-list thead th {
+    border-bottom: 1px solid #d6d6d6; /* non-RGBA fallback */
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.movie-list tbody th,
+.movie-list tbody td {
+    border-bottom: 1px solid #e6e6e6; /* non-RGBA fallback  */
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+/*  Custom stacked styles for mobile sizes */
+/*  Use a max-width media query so we don't have to undo these styles */
+@media (max-width: 40em) {
+    /*  Negate the margin between sections */
+    .movie-list tbody th {
+        margin-top: 0;
+        text-align: left;
+    }
+    /*  White bg, large blue text for rank and title */
+    .movie-list tbody th,
+    .movie-list tbody td.title {
+        display: block;
+        font-size: 1.2em;
+        line-height: 110%;
+        padding: .5em .5em;
+        background-color: #fff;
+        color: #77bbff;
+        -moz-box-shadow: 0 1px 6px rgba(0,0,0,.1);
+        -webkit-box-shadow: 0 1px 6px rgba(0,0,0,.1);
+        box-shadow: 0 1px 6px rgba(0,0,0,.1);
+    }
+    /*  Hide labels for rank and title */
+    .movie-list tbody th .ui-table-cell-label,
+    .movie-list tbody td.title .ui-table-cell-label {
+        display: none;
+    }
+    /*  Position the title next to the rank, pad to the left */
+    .movie-list tbody td.title {
+        margin-top: -2.1em;
+        padding-left: 2.2em;
+        border-bottom: 1px solid rgba(0,0,0,.15);
+    }
+    /*  Make the data bold */
+    .movie-list th,
+    .movie-list td {
+        font-weight: bold;
+    }
+    /* Make the label elements a percentage width */
+    .movie-list td .ui-table-cell-label,
+    .movie-list th .ui-table-cell-label {
+        min-width: 20%;
+    }
+}
+/* Media query to show as a standard table at wider widths */
+@media ( min-width: 40em ) {
+    /* Show the table header rows */
+    .movie-list td,
+    .movie-list th,
+    .movie-list tbody th,
+    .movie-list tbody td,
+    .movie-list thead td,
+    .movie-list thead th {
+        display: table-cell;
+        margin: 0;
+    }
+    /* Hide the labels in each cell */
+    .movie-list td .ui-table-cell-label,
+    .movie-list th .ui-table-cell-label {
+        display: none;
+    }
+}
+/* Hack to make IE9 and WP7.5 treat cells like block level elements */
+/* Applied in a max-width media query up to the table layout breakpoint so we don't need to negate this */
+@media ( max-width: 40em ) {
+    .movie-list td,
+    .movie-list th {
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        float: left;
+        clear: left;
+    }
+
+@media screen and (min-width: 20em) {
+   .my-custom-class th.ui-table-priority-1,
+   .my-custom-class td.ui-table-priority-1 {
+     display: table-cell;
+   }
+}
+/* Show priority 2 at 480px (30em x 16px) */
+@media screen and (min-width: 30em) {
+   .my-custom-class  th.ui-table-priority-2,
+   .my-custom-class td.ui-table-priority-2 {
+     display: table-cell;
+   }
+}
+
+.requerido::-webkit-input-placeholder {
+    color: #F00;
+}
+</style>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+</head>
+<body>
+
+<a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Verificar</a>
+<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+    <form>
+        <div style="padding:10px 20px;">
+            <h3>Verificacion de Consumos</h3>
+            <label for="rpe" class="ui-hidden-accessible">Username:</label>
+            <input type="text" name="rpe" id="rpe" value="" placeholder="Rpe" data-theme="a">
+            <label for="pass" class="ui-hidden-accessible">Password:</label>
+            <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" data-theme="a">
+			<label for="medidor" class="ui-hidden-accessible">Medidor:</label>
+            <input type="text" name="medidor" id="medidor" value="6RE574" placeholder="medidor" data-theme="a">
+            <button type="submit" id="verificar" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Verificar</button>
+        </div>
+    </form>
+</div>
+
+
+<div data-role="tabs" id="tabs">
+  <div data-role="navbar">
+    <ul>
+      <li><a href="#uno" data-ajax="false">Grafica</a></li>
+      <li><a href="#dos" data-ajax="false">Listado</a></li>
+      <li><a href="#tres" data-ajax="false">Otros</a></li>
+    </ul>
+  </div>
+  
+	<div id="uno" class="ui-body-d ui-content">
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
+          </div>
+    </div>
+  <div id="dos" class="ui-body-d ui-content">
+     <table data-role="table" id="movie-table-custom" data-mode="reflow"  class="ui-body-d ui-shadow table-stripe ui-responsive">
+  <thead>
+    <tr>
+      <th>RPU</th>
+      <th>Desde</th>
+      <th>Hasta</th>
+      <th>Consumo Kwh</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+  </tbody>
+</table>
+  </div>
+<div id="tres" class="ui-body-d ui-content">
+    <h1>tercer tab</h1>
+  </div>
+</div>
+
+
+
+<script>
+ document.addEventListener("deviceready", onDeviceReady, false);
+ 
+   
+
+    
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+        
+    }
+	
+	
+	$(function() {
+		
+		var rpe 	= $("#rpe");
+		var pass 	= $("#pass");
+		var medidor = $("#medidor");
+		var i=0;
+		
+		$("#verificar").on("click",function(){
+			event.preventDefault();
+		
+			$.getJSON("consumoHistoricoSicom_json.php?medidor="+medidor.val(), function(result){
+				$("#tbody").empty();
+				$.each(result, function(i, field){
+					 
+					 $("#tbody").append("<tr><th>"+field.rpuTmp+"</th><td class=\"title\">"+field.desde+"</td><td>"+field.hasta+"</td><td>"+field.consumokwh+"</td><td>$ "+field.total+"</td></tr>");
+					 
+				});
+				$("#popupLogin").popup("close");
+				
+			});			
+			 
+			});
+			
+			
+			
+			
+			var arreMes = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+                var datos =[7.0, 55, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6];
+    $('#container').highcharts({
+        title: {
+            text: 'Consumo promedio de usuario',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Fuente: SICOM-CFE',
+            x: -20
+        },
+        xAxis: {
+            categories: arreMes
+        },
+        yAxis: {
+            title: {
+                text: 'Consumo (Kwh)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' Kwh'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '2016',
+            data: datos
+        }, {
+            name: 'New York',
+            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+        }, {
+            name: 'Berlin',
+            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+        }, {
+            name: 'London',
+            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+        }]
+    });
+			
+			
+		});
+	
+	
+</script>
+</body>
+</html>
