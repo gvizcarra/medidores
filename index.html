@@ -125,16 +125,24 @@
 }
 </style>
 
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<link rel="stylesheet" href="jquery.mobile-1.4.5.min.css" />
+<script src="jquery-1.11.1.min.js"></script>
+<script src="jquery.mobile-1.4.5.min.js"></script>
 
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
 
 </head>
 <body>
 
+<div class="app">
+            <h1>Apache Cordova</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+        </div>
+		
 <a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Verificar</a>
 <div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
     <form>
@@ -188,7 +196,7 @@
 
 
 <script>
- document.addEventListener("deviceready", onDeviceReady, false);
+
  
    
 
@@ -196,7 +204,7 @@
 
     // Cordova is ready
     //
-    function onDeviceReady() {
+   
 		
 		$(function() {
 		
@@ -275,7 +283,7 @@
 			
 		});
         
-    }
+  
 	
 	
 	
