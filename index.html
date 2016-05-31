@@ -220,7 +220,7 @@
 		$("#verificar").on("click",function(){
 			event.preventDefault();
 		
-			$.getJSON("consumoHistoricoSicom_json.php?medidor="+medidor.val(), function(result){
+			$.getJSON("http://10.6.2.103/portal/phoneGap/consumoHistoricoSicom_json.php?medidor="+medidor.val(), function(result){
 				$("#tbody").empty();
 				$.each(result, function(i, field){
 					 
